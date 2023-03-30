@@ -23,7 +23,7 @@ def dash(request):
         form = ConsultationForm()
     else:
         form = ConsultationForm()
-    return render(request, 'dash.html', {'form':form})
+    return render(request, 'public_page/dash.html', {'form':form})
 
 def signup(request):
     if request.method == 'POST':
@@ -35,10 +35,10 @@ def signup(request):
             name = form.cleaned_data.get('name')
             return redirect('dash')
         else:
-            return render(request, 'signup.html')
+            return render(request, 'public_page/signup.html')
     else:
         form = AllUserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'public_page/signup.html', {'form': form})
 
 def loginn(request):
     message=''
@@ -57,7 +57,7 @@ def loginn(request):
             else:
                 message = messages.error(request, 'Identifiants invalides.')
     return render(
-        request, 'login.html', context={'form': form, 'message': message})
+        request, 'public_page/login.html', context={'form': form, 'message': message})
 
 def logoutt(request):
     logout(request)
