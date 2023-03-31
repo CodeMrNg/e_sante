@@ -23,7 +23,7 @@ def dash(request):
         form = ConsultationForm()
     else:
         form = ConsultationForm()
-    return render(request, 'public_page/dash.html', {'form':form})
+    return render(request, 'dash_page/dash.html', {'form':form})
 
 def signup(request):
     if request.method == 'POST':
