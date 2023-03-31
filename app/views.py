@@ -15,7 +15,7 @@ from threading import Thread
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'public_page/index.html')
 
 @login_required
 def dash(request):
