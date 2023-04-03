@@ -53,7 +53,12 @@ def loginn(request):
             if user is not None:
                 login(request, user)
                 message = messages.success(request, 'Vous êtes connecté.')
-                return redirect('dash')
+                if user.statuts == 'Medecin':
+                    return redirect('dash')
+                elif user.statut == 'Patient':
+                    return redirect("dash")
+                else:
+                    return redirect('dash')
             else:
                 message = messages.error(request, 'Identifiants invalides.')
     return render(

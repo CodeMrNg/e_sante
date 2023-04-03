@@ -43,17 +43,57 @@ class AllUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    class Meta:
+        verbose_name = "AllUser"
+        verbose_name_plural = "AllUsers"
 
+    def __str__(self):
+        return self.name
 
 class Consultation(models.Model):
     date = models.DateTimeField("Date de la consultation")
     medecin = models.CharField(max_length=50)
     patient = models.CharField(max_length=50)
     interprete = models.CharField(max_length=50)
+    tokken = models.CharField( max_length=50)
 
     class Meta:
-        verbose_name = ""
-        verbose_name_plural = "s"
+        verbose_name = "Consultation"
+        verbose_name_plural = "Consultations"
 
     def __str__(self):
         return self.name
+
+
+class Horaire(models.Model):
+    choix= (
+        ('Lundi','Lundi'),
+        ('Mardi','Mardi'),
+        ('Mercredi','Mercredi'),
+        ('Jeudi','Jeudi'),
+        ('Vendredi','Vendredi'),
+        ('Samedi','Samedi'),
+        ('Dimanche','Dimanche'),
+    )
+    jours = models.CharField('choisiser votre jour', max_length=50, choices=choix, default='Lundi')
+    temp = models.TimeField()
+    user = models.ForeignKey(AllUser, on_delete=models.CASCADE)
+    class Meta:
+        verbose_name = ("Horaire")
+        verbose_name_plural = ("Horaires")
+
+    def __str__(self):
+        return self.jours
+
+
+class Notification(models.Model):
+    date = models.DateTimeField( auto_now_add=True)
+    user = models.ForeignKey(AllUser, on_delete=models.CASCADE)
+    text = models.TextField()
+
+    class Meta:
+        verbose_name = ("Notification")
+        verbose_name_plural = ("Notifications")
+
+    def __str__(self):
+        return self.user
