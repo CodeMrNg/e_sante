@@ -17,7 +17,8 @@ from threading import Thread
 def index(request):
     return render(request, 'public_page/index.html')
 
-@login_required
+
+#  vue pour le medecin
 def dash(request):
     if request.method == 'POST':
         form = ConsultationForm()
@@ -33,7 +34,7 @@ def signup(request):
             email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
             name = form.cleaned_data.get('name')
-            return redirect('dash')
+            return redirect('login')
         else:
             return render(request, 'public_page/signup.html')
     else:
@@ -53,12 +54,7 @@ def loginn(request):
             if user is not None:
                 login(request, user)
                 message = messages.success(request, 'Vous êtes connecté.')
-                if user.statuts == 'Medecin':
-                    return redirect('dash')
-                elif user.statut == 'Patient':
-                    return redirect("dash")
-                else:
-                    return redirect('dash')
+                return redirect('dash')
             else:
                 message = messages.error(request, 'Identifiants invalides.')
     return render(

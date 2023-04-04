@@ -19,14 +19,12 @@
       </li>
       {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'dash' %}">Dashbord</a>
-      </li>      
+        <a class="nav-link" href="{% url 'dash' %}">Dashbord.</a>
+      </li>
       <li class="nav-item">
         <p class="nav-link">Bonjours {{ user.name }}.</p>
       </li>
-
       <li class="nav-item">
-
         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         {% else %}
       </li>
